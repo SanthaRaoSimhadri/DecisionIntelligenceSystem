@@ -1,0 +1,29 @@
+{
+  "rules": [
+    {
+      "name": "High Risk - Low Engagement",
+      "priority": 1,
+      "conditions": [
+        {"feature": "churn_prob", "operator": ">", "value": 0.7},
+        {"feature": "engagement_score", "operator": "<", "value": 0.3}
+      ],
+      "action": "Offer Discount"
+    },
+    {
+      "name": "Inactive User",
+      "priority": 2,
+      "conditions": [
+        {"feature": "days_since_last_login", "operator": ">", "value": 30}
+      ],
+      "action": "Send Notification"
+    },
+    {
+      "name": "High Support Issues",
+      "priority": 3,
+      "conditions": [
+        {"feature": "support_tickets", "operator": ">", "value": 3}
+      ],
+      "action": "Customer Support Follow-up"
+    }
+  ]
+}

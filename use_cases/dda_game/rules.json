@@ -1,0 +1,29 @@
+{
+  "rules": [
+    {
+      "name": "Player Dominating",
+      "priority": 1,
+      "conditions": [
+        {"feature": "churn_prob", "operator": ">", "value": 0.7}
+      ],
+      "action": "Increase Difficulty"
+    },
+    {
+      "name": "Player Struggling",
+      "priority": 1,
+      "conditions": [
+        {"feature": "churn_prob", "operator": "<", "value": 0.3}
+      ],
+      "action": "Decrease Difficulty"
+    },
+    {
+      "name": "Balanced",
+      "priority": 2,
+      "conditions": [
+        {"feature": "churn_prob", "operator": ">=", "value": 0.3},
+        {"feature": "churn_prob", "operator": "<=", "value": 0.7}
+      ],
+      "action": "Maintain Difficulty"
+    }
+  ]
+}
