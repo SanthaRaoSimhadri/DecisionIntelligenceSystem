@@ -6,3 +6,4 @@ uvicorn
 joblib
 streamlit
 requests
+shap

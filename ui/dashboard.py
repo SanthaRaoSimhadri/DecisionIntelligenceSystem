@@ -8,6 +8,25 @@ Streamlit Dashboard
 
 import streamlit as st
 import requests
+import matplotlib.pyplot as plt
+
+def plot_shap_values(shap_dict):
+    features = list(shap_dict.keys())
+    values = list(shap_dict.values())
+
+    # Sort by absolute importance
+    sorted_pairs = sorted(zip(features, values), key=lambda x: abs(x[1]), reverse=True)
+    features, values = zip(*sorted_pairs)
+
+    fig, ax = plt.subplots()
+
+    colors = ['green' if v > 0 else 'red' for v in values]
+    ax.barh(features, values, color=colors)
+    ax.set_title("Feature Impact (SHAP)")
+    ax.set_xlabel("Contribution to Prediction")
+    
+
+    st.pyplot(fig)
 
 st.set_page_config(page_title="Decision Intelligence System", layout="centered")
 
@@ -85,6 +104,15 @@ if st.button("🔍 Get Decision"):
             st.write("### 🧾 Reason")
             for r in result["reason"]:
                 st.write(f"- {r}")
+            
+            # Model Explanation
+            st.write("### 🤖 Model Explanation (SHAP)")
+            shap_data = result.get("model_explanation", {})
+
+            if shap_data:
+                plot_shap_values(shap_data)
+            else:
+                st.write("No explanation available")
 
         else:
             st.error("API Error")
