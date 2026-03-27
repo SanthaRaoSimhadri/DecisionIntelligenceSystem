@@ -1,116 +1,147 @@
-🧠 Decision Intelligence System
-🚀 Overview
+# 🧠 Decision Intelligence System
 
-This project implements a domain-agnostic Decision Intelligence Platform that combines:
+## 🚀 Overview
 
-Machine Learning (probabilistic inference)
+This project implements a **domain-agnostic Decision Intelligence Platform** that combines:
 
-Rule-based systems (policy logic)
+* Machine Learning (probabilistic inference)
+* Rule-based systems (policy logic)
+* SHAP-based explainability (model transparency)
+* API + UI layers for real-world usage
 
-Explainability (transparent decisions)
+---
 
-API + UI layers for real-world usage
+## 🎯 Key Idea
 
-🎯 Key Idea
-
-Traditional ML systems stop at predictions.
+Most ML systems stop at prediction.
 
 This system goes further:
 
-Prediction → Decision → Action → Explanation
+**Prediction → Decision → Action → Explanation**
 
-🏗️ Architecture
+---
+
+## 🏗️ Architecture
+
+```
 User Input
+   ↓
+Streamlit UI
    ↓
 FastAPI Layer
    ↓
 Decision Engine
  ├── ML Model (Prediction)
  ├── Rule Engine (Policy Logic)
+ ├── SHAP Explainer
    ↓
 Decision Output + Explanation
-🔌 Use Cases
-📊 1. Customer Retention
+```
 
-Predict churn probability
+---
 
-Actions:
+## 🔌 Use Cases
 
-Offer Discount
+### 📊 Customer Retention
 
-Send Notification
+* Predict churn probability
+* Trigger actions:
 
-No Action
+  * Offer Discount
+  * Send Notification
+  * No Action
 
-🎮 2. Game AI (Dynamic Difficulty Adjustment)
+---
 
-Analyze player performance
+### 🎮 Game AI (Dynamic Difficulty Adjustment)
 
-Actions:
+* Analyze player performance
+* Adjust difficulty dynamically:
 
-Increase Difficulty
+  * Increase Difficulty
+  * Decrease Difficulty
+  * Maintain Balance
 
-Decrease Difficulty
+---
 
-Maintain Balance
+## ⚙️ Tech Stack
 
-⚙️ Tech Stack
+* Python
+* scikit-learn
+* FastAPI
+* Streamlit
+* SHAP
+* JSON-based rule engine
 
-Python
+---
 
-scikit-learn
+## 🧠 System Design Highlights
 
-FastAPI
+* Separation of training vs inference pipelines
+* Config-driven rule engine (no hardcoding)
+* Safe rule evaluation (no eval)
+* Multi-domain extensibility
+* Explainable AI (SHAP + rule trace)
+* API-first architecture
 
-Streamlit
+---
 
-JSON-based rule engine
+## ▶️ How to Run
 
-🧠 System Design Highlights
+### 1. Install dependencies
 
-✅ Separation of training vs inference
-
-✅ Config-driven rule engine (no hardcoding)
-
-✅ Safe rule evaluation (no eval)
-
-✅ Multi-domain extensibility
-
-✅ Explainable decisions
-
-✅ API-first architecture
-
-▶️ How to Run
-1. Install dependencies
 pip install -r requirements.txt
-2. Train models
+
+### 2. Train models
+
 python train.py
-3. Run API
+
+### 3. Run API
+
 uvicorn api.app:app --reload
-4. Run UI
+
+### 4. Run UI
+
 streamlit run ui/dashboard.py
-🌐 API Endpoints
-Endpoint	Description
-/predict	ML prediction only
-/decision	Full decision system
-/decision/dda	DDA game decision
-📊 Example Output
+
+---
+
+## 🌐 API Endpoints
+
+| Endpoint      | Description                 |
+| ------------- | --------------------------- |
+| /predict      | ML prediction only          |
+| /decision     | Customer retention decision |
+| /decision/dda | Game AI decision            |
+
+---
+
+## 📊 Example Output
+
+```
 {
   "score": 0.54,
   "decision": "Send Notification",
   "rule_triggered": "Inactive User",
-  "reason": ["days_since_last_login > 30"]
+  "reason": ["days_since_last_login > 30"],
+  "model_explanation": {
+    "engagement_score": -0.12,
+    "days_since_last_login": 0.25
+  }
 }
-🔥 Key Learning
+```
 
-“AI systems should not just predict—they should help make decisions.”
+---
 
-🚀 Future Enhancements
+## 🔥 Key Learning
 
-SHAP-based explainability
+AI systems should not just predict—they should help make decisions.
 
-Model versioning
+---
 
-Feature validation (Pydantic)
+## 🚀 Future Enhancements
 
-Cloud deployment
+* Model versioning
+* Feature validation (Pydantic)
+* Cloud deployment
+* Additional domains (fraud, finance)
